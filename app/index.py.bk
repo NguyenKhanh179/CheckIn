@@ -1,0 +1,14 @@
+#  -*- coding: utf-8 -*-
+from flask import url_for, g
+from flask_appbuilder import IndexView, expose
+from werkzeug.utils import redirect
+
+
+class MyIndexView(IndexView):
+    @expose('/')
+    def index(self):
+        user = g.user
+        if user.is_anonymous:
+            return redirect('/login')
+        else:
+            return redirect(url_for('QuizView.index'))

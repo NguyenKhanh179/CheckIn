@@ -1,0 +1,76 @@
+{% extends "appbuilder/base.html" %}
+
+{% block head_css %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/game_v0.1.css')}}"></link>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/app_v01.css')}}"></link>
+{% endblock %}
+
+{% block head_js %}
+    {{ super() }}
+
+{% endblock %}
+
+{% block content %}
+<div class="container_game">
+      <div id="loader"></div>
+      <div id="game" class="justify-center flex-column hidden">
+        <div id="hud">
+          <div id="hud-item">
+            <p id="progressText" class="hud-prefix">
+              Correct Answers
+            </p>
+            <div id="progressBar">
+              <div id="progressBarFull"></div>
+            </div>
+          </div>
+          <div id="hud-item">
+            <p class="hud-prefix">
+              Câu hỏi
+            </p>
+            <h1 class="hud-main-text" id="score">
+              1
+            </h1>
+          </div>
+        </div>
+         <div id="alert_wrong_message" class="alert alert-warning hidden">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            Bạn đã trả lời sai lần 1, bạn còn một cơ hội cuối cùng để trả lời lại
+         </div>
+        <h2 id="question"></h2>
+        <div id = "answer_a_container" class="choice-container" onclick="answer_question('answer_a')">
+          <p class="choice-prefix">A</p>
+          <p class="choice-text" data-number="1" id="answer_a" ></p>
+          <div class="choice-select">
+              <input type="checkbox" class="select-box">
+          </div>
+        </div>
+        <div id = "answer_b_container" class="choice-container" onclick="answer_question('answer_b')">
+          <p class="choice-prefix">B</p>
+          <p class="choice-text" data-number="2" id="answer_b" ></p>
+            <div class="choice-select">
+              <input type="checkbox" class="select-box">
+          </div>
+        </div>
+        <div id = "answer_c_container" class="choice-container" onclick="answer_question('answer_c')">
+          <p class="choice-prefix">C</p>
+          <p class="choice-text" data-number="3" id="answer_c" ></p>
+            <div class="choice-select">
+              <input type="checkbox" class="select-box">
+          </div>
+        </div>
+        <div id = "answer_d_container" class="choice-container" onclick="answer_question('answer_d')">
+          <p class="choice-prefix">D</p>
+          <p class="choice-text" data-number="4" id="answer_d" ></p>
+            <div class="choice-select">
+              <input type="checkbox" class="select-box">
+          </div>
+        </div>
+          <div id="multi_select_button" class="flex-center flex-column" style="margin-bottom: 72px;margin-top: 31px;">
+            <a class="btn" onclick="answer_question_multi()">Gửi trả lời</a>
+          </div>
+      </div>
+
+    </div>
+    <script src="{{url_for('static',filename='js/game_v0.9.6.js')}}"></script>
+{% endblock %}

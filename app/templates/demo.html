@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Embedded Analytics with Tableau</title>
+
+    <script type="text/javascript"
+		src="http://10.1.27.90:443/javascripts/api/tableau-2.5.0.min.js">
+	</script>
+		
+    <script type="text/javascript">
+        function initViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+                // url = "http://10.1.27.90:443/trusted/<tick-ket>/views/Superstore_15990979822810/Overview",
+                url = "https://public.tableau.com/views/IdahoInitialClaims/Dashboard?:language=en&:display_count=y&:origin=viz_share_link",
+
+                options = {
+                    hideTabs: true,
+					"County": "Latah",
+                    device: "desktop", // default, desktop, tablet, or phone
+                    // width: "100vh",
+                    // height: "100%",
+                    onFirstInteractive: function () {
+                        
+                    }
+                };
+
+            var viz = new tableau.Viz(containerDiv, url, options);
+            // Create a viz object and embed it in the container div.
+        }
+    </script>
+</head>
+<body onload="initViz();">
+    <div id="vizContainer"></div>
+</body>
+</html>

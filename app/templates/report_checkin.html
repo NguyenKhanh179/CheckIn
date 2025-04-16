@@ -1,0 +1,94 @@
+{% extends "appbuilder/base.html" %}
+{% block head_css %}
+    {{ super() }}
+<!--    <link rel="stylesheet" href="{{url_for('static',filename='css/game.css')}}"></link>-->
+<!--    <link rel="stylesheet" href="{{url_for('static',filename='css/app.css')}}"></link>-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/report_department.css')}}"></link>
+{% endblock %}
+{% block content %}
+<div id="loader_container" class="container_game">
+    <div id="loader" ></div>
+</div>
+<div id="content_container" class="hidden">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_href"
+                    data-original-title="" title="" aria-expanded="true">Search</a><span class="caret"></span>
+            </h4>
+        </div>
+
+        <div id="accordion1_href" class="panel-collapse collapse in collapsed" aria-expanded="true" style="">
+            <div class="panel-body">
+                <table class="table table-responsive table-hover filters">
+                    <tbody>
+
+                        <tr>
+                            <td class="col-lg-1 col-md-1"><a href="#" class="btn remove-filter">Ngày báo cáo</a></td>
+                            <td>
+                                <div class="input-group date appbuilder_date" id="datepicker">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar cursor-hand">
+                                        </i>
+                                    </span>
+                                    <input class=" filter_val form-control" data-format="yyyy-MM-dd" id="report_date_param"
+                                        name="report_date" type="text" value=""/>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn  btn-sm btn-primary" onclick="load_content()">Search
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="justify-center flex-column">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Danh sách phòng</h4>
+                    </div>
+                    <div id="c_list_departments" class="panel panel-default">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Danh sách nhân viên đi muộn</h4>
+                    </div>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nhân viên</th>
+                                <th scope="col">Phòng</th>
+                                <th scope="col">Thời gian checkin</th>
+                                <th scope="col">CBQL</th>
+                                <th scope="col">Lý do</th>
+                            </tr>
+                            </thead>
+                            <tbody id="content_container_body">
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='js/report_department.js')}}"></script>
+    <script>
+
+
+
+    </script>
+</div>
+{% endblock %}

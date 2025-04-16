@@ -1,0 +1,24 @@
+{% extends "appbuilder/base.html" %}
+{% block head_css %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/game.css')}}"></link>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/app.css')}}"></link>
+{% endblock %}
+
+{% block head_js %}
+    {{ super() }}
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="flex-center flex-column" >
+        <h1 style="margin-bottom: 2rem !important;">SME Checkin</h1>
+    </div>
+    <div class="flex-center flex-column" style="margin-bottom: 72px;">
+        <img src="{{ image_url }}"/>
+    </div>
+          <div id="home" class="flex-center flex-column" style="margin-bottom: 72px;margin-top: 31px;">
+            <a class="btn" href="start">Bắt đầu</a>
+          </div>
+    </div>
+{% endblock %}

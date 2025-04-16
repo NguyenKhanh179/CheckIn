@@ -1,0 +1,73 @@
+{% extends "appbuilder/base.html" %}
+
+{% block head_css %}
+    {{ super() }}
+<style>
+    h1 {
+      font-size: 5rem;
+      color: #56a5eb;
+      margin-bottom: 5rem;
+      text-align: center;
+    }
+    h3 {
+      font-size: 2.7rem;
+      color: #56a5eb;
+      margin-bottom: 5rem;
+    }
+</style>
+<!--<link rel="stylesheet" href="{{url_for('static',filename='css/app.css')}}"></link>-->
+{% endblock %}
+
+{% block head_js %}
+    {{ super() }}
+
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+      <div id="end" class="flex-center flex-column">
+          <h1 id="finalScore">
+              {% if last_wrong_question < 0 %}
+              <div>Cảm ơn bạn đã checkin cùng SME. Chúc bạn một ngày làm việc vui vẻ!</div>
+              {% elif last_wrong_question < 1 %}
+              <div>Cảm ơn bạn đã checkin cùng SME. Chúc bạn một ngày làm việc vui vẻ!</div>
+              {% else %}
+              <div>Cảm ơn bạn đã checkin cùng SME. Chúc bạn một ngày làm việc vui vẻ!</div>
+              {% endif %}
+          </h1>
+
+      </div>
+      <h3>Thời gian đã checkin trong ngày:</h3>
+      <div id="logged" class="flex-center flex-column">
+          <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">IP</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Số câu trả lời đúng</th>
+                    <th scope="col">Thời gian trả lời (giây)</th>
+                    <th scope="col">Thời gian login</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for logged_time in logged_times %}
+                    <tr>
+                      <th scope="row">{{ logged_time.id }}</th>
+                      <td>{{ logged_time.ip }}</td>
+                      <td>{{ logged_time.logged_time }}</td>
+                        <td>{{5- logged_time.wrong_answers}}</td>
+                        <td>{{ logged_time.answer_time}}</td>
+                        <td>{{ logged_time.login_time}}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+      </div>
+       <div class="flex-center flex-column" style="justify-content: center;  align-items: center;display: flex;  flex-direction: column;">
+           <img src="{{ image_url}}"/>
+      </div>
+    </div>
+<!--     <script src="{{url_for('static',filename='js/end.js')}}"></script>-->
+{% endblock %}
+

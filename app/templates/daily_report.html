@@ -1,0 +1,131 @@
+{% extends "appbuilder/base.html" %}
+{% block head_css %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/report_department.css')}}"></link>
+{% endblock %}
+{% block content %}
+<div id="content_container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_href"
+                    data-original-title="" title="" aria-expanded="true">Search</a><span class="caret"></span>
+            </h4>
+        </div>
+
+        <div id="accordion1_href" class="panel-collapse collapse in collapsed" aria-expanded="true" style="">
+            <div class="panel-body">
+                <form>
+                    <table class="table table-responsive table-hover filters">
+                        <tbody>
+
+                            <tr>
+                                <td class="col-lg-1 col-md-1"><a href="#" class="btn remove-filter">Từ ngày</a></td>
+                                <td>
+                                    <div class="input-group date appbuilder_date" id="from_datepicker">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar cursor-hand">
+                                            </i>
+                                        </span>
+                                        <input class=" filter_val form-control" data-format="yyyy-MM-dd" id="from_date_param"
+                                            name="from_date" type="text" value="{{from_date}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-1 col-md-1"><a href="#" class="btn remove-filter">Đến ngày</a></td>
+                                <td>
+                                    <div class="input-group date appbuilder_date" id="to_date_datepicker">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar cursor-hand">
+                                            </i>
+                                        </span>
+                                        <input class=" filter_val form-control" data-format="yyyy-MM-dd" id="to_date_param"
+                                            name="to_date" type="text" value="{{to_date}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                 <input type="hidden" id="department_id" name="department_id" value="{{department_id}}"/>
+                <button type="submit" class="btn  btn-sm btn-primary" onclick="load_content()">Search
+                    <i class="fa fa-search"></i>
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="justify-center flex-column">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Danh sách phòng</h4>
+                    </div>
+                    <div id="c_list_departments" class="panel panel-default">
+                        {% for department in departments %}
+                            <a class="list-group-item list-group-item-action link {% if department.id|string() == department_id|string() %}active{% endif %}" id="{{department.id}}"
+                                style="" href="?from_date={{from_date}}&to_date={{to_date}}&department_id={{department.id}}">
+                                {{department.name}}
+                            </a>
+                        {% endfor %}
+                        <div class="list-group" id="list-department-tab" role="tablist">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Danh sách nhân viên đi muộn</h4>
+                    </div>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ngày báo cáo</th>
+                                <th scope="col">Nhân viên</th>
+                                <th scope="col">Phòng</th>
+                                <th scope="col">Thời gian checkin</th>
+                                <th scope="col">CBQL</th>
+                                <th scope="col">Lý do</th>
+                            </tr>
+                            </thead>
+                            <tbody id="content_container_body">
+                                {% for row in report %}
+                                <tr>
+                                    <th scope="row">
+                                        <div class="btn-group btn-group-xs" style="display: flex;">
+                                            <a href="/mbcheckin/show/{{row.id}}" class="btn btn-sm btn-default" data-toggle="tooltip" rel="tooltip" title="" data-original-title="Show record">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                            <a href="/mbcheckin/edit/{{row.id}}" class="btn btn-sm btn-default" data-toggle="tooltip" rel="tooltip" title="" data-original-title="Edit record">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <td>{{row.transaction_date}}</td>
+                                    <td>{{row.username}}</td>
+                                    <td>{{row.phong}}</td>
+                                    <td>{{row.checkin}}</td>
+                                    <td>{{row.auth_user}}</td>
+                                    <td>{{row.reason}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+
+    </script>
+</div>
+{% endblock %}
